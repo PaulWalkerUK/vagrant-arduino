@@ -1,0 +1,7 @@
+---
+# To set a proxy, set [use] to true and specify a [value].
+# Set [use] to false to disable
+http_proxy:
+  use: true
+  value: 'http://192.168.10.111:3128'
+xfce::display_manager: lightdm
