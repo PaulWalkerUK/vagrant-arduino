@@ -5,3 +5,4 @@ http_proxy:
   use: true
   value: 'http://192.168.10.111:3128'
 xfce::display_manager: lightdm
+xorg::keyboard_layout: 'gb'
