@@ -12,6 +12,8 @@ mod 'paulwalkeruk-lightdm', '>=1.0.0 <2.0.0'
 
 mod 'paulwalkeruk-xfce', '>=1.0.0 <2.0.0'
 
+mod 'saz-locales', '2.5.1'
+
 # mod 'paulwalkeruk-xfce',
 #   :git => 'git://github.com/PaulWalkerUK/puppet-xfce.git'
 #   ##:path => '/vagrant/localmodules/paulwalkeruk-xfce-0.1.0'
