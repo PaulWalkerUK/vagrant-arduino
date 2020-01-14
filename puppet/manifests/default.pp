@@ -7,6 +7,7 @@ if $use_proxy {
 }
 
 include vbox_guest_additions
+include locales
 include xorg
 include lightdm
 include xfce
