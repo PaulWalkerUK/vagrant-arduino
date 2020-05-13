@@ -1,8 +1,7 @@
 # Update catalog
-pacman -Sy --noconfirm
 
-# Update keyring - reduce chance of lookup from keyserver failing?
-pacman -S --noconfirm --needed archlinux-keyring
+# Backup existing mirrorlist
+cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
 
 # If pre-prepared mirrorlist already exists in .\vagrant then use that,
 # otherwise generate one
@@ -12,18 +11,15 @@ if [ -f "$FILE" ]; then
     cp $FILE /etc/pacman.d/mirrorlist
 else 
     echo "$FILE does not exist"
-    . /vagrant/shell/set_proxy.sh
-    pacman -S --noconfirm --needed reflector
-
-    export http_proxy=
-    reflector --verbose --protocol http --sort rate --save /etc/pacman.d/mirrorlist
-    cp /etc/pacman.d/mirrorlist $FILE
+    curl -s "https://www.archlinux.org/mirrorlist/?country=GB&country=FR&protocol=http&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' > /etc/pacman.d/mirrorlist
 fi
 
 # Update existing packages
 . /vagrant/shell/set_proxy.sh
+pacman -Syyuu --noconfirm
 
-pacman -Su --noconfirm
+## Maybe needed for vbox desktop? Seems OK without
+#pacman -S --noconfirm --needed xf86-video-vmware
 
 #pacman -S --noconfirm --needed base-devel
 #pacman -S --noconfirm --needed git
