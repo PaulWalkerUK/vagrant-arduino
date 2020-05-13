@@ -4,16 +4,16 @@
 Vagrant.configure("2") do |config|
 
   config.vm.box = "archlinux/archlinux"
-
+  
 
   config.vm.provider :virtualbox do |vb|
     vb.gui = true
-    # This allows symlinks to be created within the /vagrant root directory,
+    # This allows symlinks to be created within the /vagrant root directory, 
     # which is something librarian-puppet needs to be able to do. This might
     # be enabled by default depending on what version of VirtualBox is used.
-
+    
     ####vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
-
+    
     vb.cpus = 4
     vb.memory = "4096"
     vb.customize ["modifyvm", :id, "--vram", "256"]
@@ -21,9 +21,9 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--uart1", "0x3e8", "4"]
     vb.customize ["modifyvm", :id, "--uartmode1", "COM3"]
   end
-
+  
   config.vm.provision "update-arch", type: "shell", path: "shell/update-arch.sh"
-
+  
   config.vm.provision "setup-puppet", type: "shell", path: "shell/setup-puppet.sh"
 
 
